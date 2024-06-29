@@ -1,14 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateTaskComponent } from '../create-task/create-task.component';
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatButtonModule],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss',
 })
 export default class TaskListComponent {
+  readonly dialog = inject(MatDialog);
   tasks = [
     {
       title: 'Complete Project Proposal',
@@ -32,4 +36,11 @@ export default class TaskListComponent {
       priority: 'low',
     },
   ];
+
+  createTask(): void {
+    this.dialog.open(CreateTaskComponent, {
+      data: 'Hello',
+      width: '500px',
+    });
+  }
 }

@@ -1,5 +1,9 @@
 <div class="task-list">
-  <h2>Task List</h2>
+  <div class="task-creation">
+    <button type="button" (click)="createTask()" mat-stroked-button>
+      Create Task
+    </button>
+  </div>
 
   <div class="task-item" *ngFor="let task of tasks">
     <div class="task-info">

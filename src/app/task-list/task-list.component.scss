@@ -58,10 +58,6 @@
         border: none;
         cursor: pointer;
         transition: background-color 0.3s;
-
-        &:hover {
-          background-color: #ddd;
-        }
       }
 
       .edit-button {
@@ -74,5 +70,11 @@
         color: white;
       }
     }
+  }
+
+  .task-creation {
+    display: flex;
+    margin: 10px;
+    justify-content: flex-end;
   }
 }
