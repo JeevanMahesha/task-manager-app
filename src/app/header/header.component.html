@@ -1,1 +1,18 @@
-<h1>header works!</h1>
+<header class="navbar">
+  <div class="container">
+    <div class="navbar-brand">
+      <a routerLink="/" class="logo">Task Manager</a>
+    </div>
+    <nav class="navbar-links">
+      <ul>
+        <li><a routerLink="/tasks" routerLinkActive="active">Tasks</a></li>
+        <li>
+          <a routerLink="/calendar" routerLinkActive="active">Calendar</a>
+        </li>
+        <li>
+          <a routerLink="/settings" routerLinkActive="active">Settings</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
