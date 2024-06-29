@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './about-task.component.html',
-  styleUrl: './about-task.component.scss'
+  styleUrl: './about-task.component.scss',
 })
-export class AboutTaskComponent {
-
-}
+export default class AboutTaskComponent {}
