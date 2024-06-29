@@ -5,7 +5,7 @@
     </button>
   </div>
 
-  <div class="task-item" *ngFor="let task of tasks">
+  <div class="task-item" *ngFor="let task of tasks | async">
     <div class="task-info">
       <h3>{{ task.title }}</h3>
       <p>{{ task.description }}</p>

@@ -3,6 +3,9 @@ import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateTaskComponent } from '../create-task/create-task.component';
+import { ITask } from '../common.model';
+import { TaskService } from '../task.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-task-list',
@@ -13,34 +16,16 @@ import { CreateTaskComponent } from '../create-task/create-task.component';
 })
 export default class TaskListComponent {
   readonly dialog = inject(MatDialog);
-  tasks = [
-    {
-      title: 'Complete Project Proposal',
-      description:
-        'Draft and finalize project proposal document for client review.',
-      dueDate: new Date('2024-07-05'),
-      priority: 'high',
-    },
-    {
-      title: 'Review Code Changes',
-      description:
-        'Review and provide feedback on recent code changes in the development branch.',
-      dueDate: new Date('2024-07-10'),
-      priority: 'medium',
-    },
-    {
-      title: 'Prepare Presentation Slides',
-      description:
-        'Create slides for the upcoming team presentation on project milestones.',
-      dueDate: new Date('2024-07-15'),
-      priority: 'low',
-    },
-  ];
+  readonly taskService = inject(TaskService);
+  tasks: Observable<ITask[]> = this.taskService.getTaskValue();
+
+  constructor() {}
 
   createTask(): void {
     this.dialog.open(CreateTaskComponent, {
       data: 'Hello',
       width: '500px',
+      disableClose: true,
     });
   }
 }

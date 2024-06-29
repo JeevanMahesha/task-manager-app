@@ -1,0 +1,47 @@
+.popup {
+  background-color: #000000c2;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  width: 451px;
+}
+
+.d-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 19px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+
+  button {
+    margin-left: 10px;
+  }
+}
+
+.close {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
