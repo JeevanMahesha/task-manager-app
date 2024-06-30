@@ -70,4 +70,8 @@ export class TaskService {
       this.tasksList$.next([...taskValue]);
     }
   }
+
+  getTaskRawValue(): ITask[] {
+    return this.tasksList$.getValue();
+  }
 }

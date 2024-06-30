@@ -5,10 +5,14 @@
 .task-creation {
   display: flex;
   margin: 10px;
-  justify-content: flex-end;
-
+  gap: 10px;
+  flex-direction: row-reverse;
   button {
-    background-color: aquamarine;
+    background-color: #28a745;
+    width: 10rem;
+    height: 3rem;
+    border-color: #28a745;
+    color: white;
   }
 }
 

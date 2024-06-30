@@ -1,12 +1,36 @@
-<div class="task-list">
+<div class="task-list" *ngIf="tasks$ | async as tasks">
   <div class="task-creation">
     <button type="button" (click)="createTask()" mat-stroked-button>
       Create Task
     </button>
+    <mat-button-toggle-group
+      [formControl]="filterByPriority"
+      name="fontStyle"
+      aria-label="Font Style"
+    >
+      @for (eachPriority of priorityList; track $index) {
+      <mat-button-toggle [value]="eachPriority.key">{{
+        eachPriority.value
+      }}</mat-button-toggle>
+      }
+      <mat-button-toggle [value]="null">All Priority</mat-button-toggle>
+    </mat-button-toggle-group>
+    <mat-button-toggle-group
+      [formControl]="filterByStatus"
+      name="fontStyle"
+      aria-label="Font Style"
+    >
+      @for (eachStatus of taskStatusList; track $index) {
+      <mat-button-toggle [value]="eachStatus.key">{{
+        eachStatus.value
+      }}</mat-button-toggle>
+      }
+      <mat-button-toggle [value]="null">All Status</mat-button-toggle>
+    </mat-button-toggle-group>
   </div>
 
   <div class="task-container">
-    @for (task of tasks | async; track $index) {
+    @for (task of tasks ; track $index) {
     <mat-card class="task-item" appearance="outlined">
       <mat-card-header class="mt-20">
         <mat-card-title>{{ task.title }}</mat-card-title>
@@ -48,9 +72,7 @@
       </mat-card-footer>
     </mat-card>
     } @empty {
-    <span class="content-center">
-      You have no tasks yet. Click the button above to add a new task!</span
-    >
+    <span class="content-center"> You have no tasks yet.</span>
     }
   </div>
 </div>
