@@ -1,14 +1,10 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, filter, from, mergeMap } from 'rxjs';
 import { ITask } from './common.model';
-import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable()
 export class TaskService {
-  constructor() {
-    console.log('🚀 ~ TaskService ~ constructor ~ constructor:');
-  }
-
-  private tasksList = new BehaviorSubject<ITask[]>([
+  private tasksList$ = new BehaviorSubject<ITask[]>([
     {
       id: '1',
       title: 'Complete Project Proposal',
@@ -39,12 +35,30 @@ export class TaskService {
   ]);
 
   createNewTask(task: Partial<ITask>): void {
-    const taskValue = this.tasksList.getValue();
+    const taskValue = this.tasksList$.getValue();
     taskValue.push(task as ITask);
-    this.tasksList.next(taskValue);
+    this.tasksList$.next(taskValue);
+  }
+
+  updateTask(task: Partial<ITask>): void {
+    const taskValue = this.tasksList$.getValue();
+    const taskIndex = taskValue.findIndex(
+      (eachTask) => eachTask.id === task.id
+    );
+    if (taskIndex > -1) {
+      taskValue[taskIndex] = task as ITask;
+      this.tasksList$.next([...taskValue]);
+    }
   }
 
   getTaskValue(): Observable<ITask[]> {
-    return this.tasksList.asObservable();
+    return this.tasksList$.asObservable();
+  }
+
+  getSpecificTask(taskId: string): Observable<ITask> {
+    return this.getTaskValue().pipe(
+      mergeMap(from),
+      filter((task) => task.id === taskId)
+    );
   }
 }

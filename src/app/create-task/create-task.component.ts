@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -31,13 +31,15 @@ import { priorityLevels, taskStatus } from '../common.model';
   templateUrl: './create-task.component.html',
   styleUrl: './create-task.component.scss',
 })
-export class CreateTaskComponent {
+export class CreateTaskComponent implements OnInit {
   readonly dialogRef = inject(MatDialogRef<CreateTaskComponent>);
-  readonly data = inject<any>(MAT_DIALOG_DATA);
+  readonly matDialogData =
+    inject<Record<'taskId', string | null>>(MAT_DIALOG_DATA);
   readonly taskService = inject(TaskService);
   taskForm: FormGroup<ITaskFrom>;
   priorityLevels = priorityLevels;
   taskStatus = taskStatus;
+  actionButtonLabel = this.matDialogData.taskId ? 'Update' : 'Create';
 
   constructor() {
     const fb = inject(FormBuilder);
@@ -51,11 +53,24 @@ export class CreateTaskComponent {
     });
   }
 
-  onSubmit() {
-    if (this.taskForm.valid) {
-      this.taskService.createNewTask(this.taskForm.value);
-      this.dialogRef.close();
+  ngOnInit(): void {
+    if (this.matDialogData.taskId) {
+      this.taskService
+        .getSpecificTask(this.matDialogData.taskId)
+        .subscribe(this.taskForm.patchValue.bind(this.taskForm));
     }
+  }
+
+  onSubmit() {
+    if (this.taskForm.invalid) {
+      return;
+    }
+    if (this.matDialogData.taskId) {
+      this.taskService.updateTask(this.taskForm.value);
+    } else {
+      this.taskService.createNewTask(this.taskForm.value);
+    }
+    this.dialogRef.close();
   }
 
   onCancel() {

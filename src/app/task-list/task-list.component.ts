@@ -29,20 +29,21 @@ export default class TaskListComponent {
   readonly taskService = inject(TaskService);
   tasks: Observable<ITask[]> = this.taskService.getTaskValue();
 
-  constructor() {
-    // this.createTask();
-  }
-
-  createTask(): void {
+  createTask(id?: string): void {
     this.dialog.open(CreateTaskComponent, {
-      data: 'Hello',
       width: '500px',
       disableClose: true,
+      data: {
+        taskId: id,
+      },
     });
   }
 
-  editTask(task: ITask): void {
-    console.log('🚀 ~ TaskListComponent ~ editTask ~ ̵task:', task);
+  editTask(taskId: string | null): void {
+    if (!taskId) {
+      return;
+    }
+    this.createTask(taskId);
   }
 
   deleteTask(task: ITask): void {
