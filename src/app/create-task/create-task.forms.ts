@@ -5,5 +5,6 @@ export interface ITaskFrom {
   title: FormControl<string | null>;
   description: FormControl<string | null>;
   priority: FormControl<string | null>;
+  taskStatus: FormControl<string | null>;
   dueDate: FormControl<Date | null>;
 }

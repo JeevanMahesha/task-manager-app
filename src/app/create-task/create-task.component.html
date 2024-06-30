@@ -22,12 +22,28 @@
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Priority</mat-label>
       <mat-select formControlName="priority">
-        <mat-option value="low">Low</mat-option>
-        <mat-option value="medium">Medium</mat-option>
-        <mat-option value="high">High</mat-option>
+        @for (eachPriority of priorityLevels; track eachPriority.key) {
+        <mat-option [value]="eachPriority.value">{{
+          eachPriority.value
+        }}</mat-option>
+        }
       </mat-select>
       @if (taskForm.get('priority')?.invalid) {
       <mat-error>Priority is required</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Task Status</mat-label>
+      <mat-select formControlName="taskStatus">
+        @for (eachStatus of taskStatus; track eachStatus.key) {
+        <mat-option [value]="eachStatus.value">{{
+          eachStatus.value
+        }}</mat-option>
+        }
+      </mat-select>
+      @if (taskForm.get('taskStatus')?.invalid) {
+      <mat-error>Task Status is required</mat-error>
       }
     </mat-form-field>
 

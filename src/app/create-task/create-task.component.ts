@@ -14,6 +14,7 @@ import { ITaskFrom } from './create-task.forms';
 import { TaskService } from '../task.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { priorityLevels, taskStatus } from '../common.model';
 
 @Component({
   selector: 'app-create-task',
@@ -35,6 +36,8 @@ export class CreateTaskComponent {
   readonly data = inject<any>(MAT_DIALOG_DATA);
   readonly taskService = inject(TaskService);
   taskForm: FormGroup<ITaskFrom>;
+  priorityLevels = priorityLevels;
+  taskStatus = taskStatus;
 
   constructor() {
     const fb = inject(FormBuilder);
@@ -43,6 +46,7 @@ export class CreateTaskComponent {
       title: fb.control<string | null>(null, Validators.required),
       description: fb.control<string | null>(null, Validators.required),
       priority: fb.control<string | null>(null, Validators.required),
+      taskStatus: fb.control<string | null>(null, Validators.required),
       dueDate: fb.control<Date | null>(null, Validators.required),
     });
   }

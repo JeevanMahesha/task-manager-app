@@ -16,6 +16,7 @@ export class TaskService {
         'Draft and finalize project proposal document for client review.',
       dueDate: new Date('2024-07-05'),
       priority: 'high',
+      taskStatus: 'todo',
     },
     {
       id: '2',
@@ -24,6 +25,7 @@ export class TaskService {
         'Review and provide feedback on recent code changes in the development branch.',
       dueDate: new Date('2024-07-10'),
       priority: 'medium',
+      taskStatus: 'todo',
     },
     {
       id: '3',
@@ -32,6 +34,7 @@ export class TaskService {
         'Create slides for the upcoming team presentation on project milestones.',
       dueDate: new Date('2024-07-15'),
       priority: 'low',
+      taskStatus: 'todo',
     },
   ]);
 

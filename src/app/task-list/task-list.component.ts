@@ -6,11 +6,21 @@ import { CreateTaskComponent } from '../create-task/create-task.component';
 import { ITask } from '../common.model';
 import { TaskService } from '../task.service';
 import { Observable } from 'rxjs';
-
+import { GetValuePipe } from '../Pipes/get-value.pipe';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [CommonModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    GetValuePipe,
+    MatCardModule,
+    MatIconModule,
+    MatToolbarModule,
+  ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss',
 })
@@ -19,7 +29,9 @@ export default class TaskListComponent {
   readonly taskService = inject(TaskService);
   tasks: Observable<ITask[]> = this.taskService.getTaskValue();
 
-  constructor() {}
+  constructor() {
+    // this.createTask();
+  }
 
   createTask(): void {
     this.dialog.open(CreateTaskComponent, {
@@ -27,5 +39,13 @@ export default class TaskListComponent {
       width: '500px',
       disableClose: true,
     });
+  }
+
+  editTask(task: ITask): void {
+    console.log('🚀 ~ TaskListComponent ~ editTask ~ ̵task:', task);
+  }
+
+  deleteTask(task: ITask): void {
+    console.log('🚀 ~ TaskListComponent ~ deleteTask ~ task:', task);
   }
 }

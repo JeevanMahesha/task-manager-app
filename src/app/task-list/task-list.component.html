@@ -5,27 +5,44 @@
     </button>
   </div>
 
-  <div class="task-item" *ngFor="let task of tasks | async">
-    <div class="task-info">
-      <h3>{{ task.title }}</h3>
-      <p>{{ task.description }}</p>
-      <div class="task-meta">
-        <span class="due-date">Due: {{ task.dueDate | date }}</span>
-        <span
-          class="priority"
-          [ngClass]="{
-            high: task.priority === 'high',
-            medium: task.priority === 'medium',
-            low: task.priority === 'low'
-          }"
-        >
-          Priority: {{ task.priority }}
+  <div class="task-container">
+    @for (task of tasks | async; track $index) {
+    <mat-card class="task-item" appearance="outlined">
+      <mat-card-header class="mt-20">
+        <mat-card-title>{{ task.title }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          {{ task.description }}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <span class="task-meta-detail">Due: {{ task.dueDate | date }}</span>
+        <span class="priority">
+          Priority:
+          <span
+            [ngClass]="{
+              high: task.priority === 'high',
+              medium: task.priority === 'medium',
+              low: task.priority === 'low'
+            }"
+          >
+            {{ task.priority | getValue : "priority" }}
+          </span>
         </span>
-      </div>
-    </div>
-    <div class="task-actions">
-      <button class="edit-button">Edit</button>
-      <button class="delete-button">Delete</button>
-    </div>
+        <span class="task-meta-detail"
+          >Status: {{ task.taskStatus | getValue : "taskStatus" }}</span
+        >
+      </mat-card-actions>
+      <mat-card-footer>
+        <button type="button" class="edit-button" (click)="editTask(task)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button type="button" (click)="deleteTask(task)" class="delete-button">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-footer>
+    </mat-card>
+    }
   </div>
 </div>
