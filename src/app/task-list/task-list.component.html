@@ -38,7 +38,11 @@
         <button type="button" class="edit-button" (click)="editTask(task.id)">
           <mat-icon>edit</mat-icon>
         </button>
-        <button type="button" (click)="deleteTask(task)" class="delete-button">
+        <button
+          type="button"
+          (click)="deleteTask(task.id)"
+          class="delete-button"
+        >
           <mat-icon>delete</mat-icon>
         </button>
       </mat-card-footer>

@@ -46,7 +46,10 @@ export default class TaskListComponent {
     this.createTask(taskId);
   }
 
-  deleteTask(task: ITask): void {
-    console.log('🚀 ~ TaskListComponent ~ deleteTask ~ task:', task);
+  deleteTask(taskId: string | null): void {
+    if (!taskId) {
+      return;
+    }
+    this.taskService.deleteTask(taskId);
   }
 }

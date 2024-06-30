@@ -61,4 +61,13 @@ export class TaskService {
       filter((task) => task.id === taskId)
     );
   }
+
+  deleteTask(taskId: string): void {
+    const taskValue = this.tasksList$.getValue();
+    const taskIndex = taskValue.findIndex((eachTask) => eachTask.id === taskId);
+    if (taskIndex > -1) {
+      taskValue.splice(taskIndex, 1);
+      this.tasksList$.next([...taskValue]);
+    }
+  }
 }
