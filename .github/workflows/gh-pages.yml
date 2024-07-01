@@ -24,8 +24,7 @@ jobs:
       run: npm run build
 
     - name: Deploy 🚀
-      if: success()
-      uses: peaceiris/actions-gh-pages@v3
+      run: npx angular-cli-ghpages --dir=dist/task-manager-app/browser
       with:
         github_token: ${{ secrets.DEPLOYMENT }}
         folder: dist/task-manager-app/browser
