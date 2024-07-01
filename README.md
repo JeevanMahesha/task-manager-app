@@ -1,27 +1,54 @@
-# TaskManagerApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.0.
+# Task Management Application
 
-## Development server
+This is a Task Management Application that provides basic CRUD functionalities. Users can create, edit, delete, and filter tasks based on their status and priority.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Table of Contents
 
-## Code scaffolding
+- [Features](#features)
+- [Technologies](#technologies)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Features
 
-## Build
+- **Create Tasks**: Add new tasks with details such as title, description, status, and priority.
+- **Edit Tasks**: Update existing tasks to reflect changes in details, status, or priority.
+- **Filter Tasks**: Filter tasks based on their status (e.g., pending, in-progress, completed) and priority (e.g., low, medium, high).
+- **Delete Tasks**: Remove tasks that are no longer needed.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Technologies
 
-## Running unit tests
+- **Frontend**: Angular 17
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Prerequisites
 
-## Running end-to-end tests
+- **Node.js**: Ensure you have Node.js v20.X.X installed. You can download it from the [official Node.js website](https://nodejs.org/).
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Installation
 
-## Further help
+1. **Clone the Repository**
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+   ```bash
+   git clone <repository_url>
+   cd <repository_directory>
+   ```
+
+2. **Install Dependencies**
+
+   ```bash
+   npm install
+   ```
+
+## Usage
+
+1. **Run the Application**
+
+   ```bash
+   npm start
+   ```
+
+   This will start the application and you can access it in your web browser at `http://localhost:4200`.
