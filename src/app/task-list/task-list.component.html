@@ -54,9 +54,18 @@
             {{ task.priority | getValue : "priority" }}
           </span>
         </span>
-        <span class="task-meta-detail"
-          >Status: {{ task.taskStatus | getValue : "taskStatus" }}</span
+      </mat-card-actions>
+      <mat-card-actions>
+        <mat-button-toggle-group
+          (change)="updateStatus(task.id, $event)"
+          [value]="task.taskStatus"
         >
+          @for (eachStatus of taskStatusList; track $index) {
+          <mat-button-toggle [value]="eachStatus.key">{{
+            eachStatus.value
+          }}</mat-button-toggle>
+          }
+        </mat-button-toggle-group>
       </mat-card-actions>
       <mat-card-footer>
         <button type="button" class="edit-button" (click)="editTask(task.id)">

@@ -2,7 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import {
+  MatButtonToggleChange,
+  MatButtonToggleModule,
+} from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -88,5 +91,12 @@ export default class TaskListComponent {
       return;
     }
     this.taskService.deleteTask(taskId);
+  }
+
+  updateStatus(taskId: string | null, $event: MatButtonToggleChange) {
+    if (!taskId) {
+      return;
+    }
+    this.taskService.updateTaskStatus(taskId, $event.value);
   }
 }

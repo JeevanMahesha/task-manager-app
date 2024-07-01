@@ -74,4 +74,13 @@ export class TaskService {
   getTaskRawValue(): ITask[] {
     return this.tasksList$.getValue();
   }
+
+  updateTaskStatus(taskId: string, taskStatus: string): void {
+    const taskValue = this.tasksList$.getValue();
+    const taskIndex = taskValue.findIndex((eachTask) => eachTask.id === taskId);
+    if (taskIndex > -1) {
+      taskValue[taskIndex].taskStatus = taskStatus;
+      this.tasksList$.next([...taskValue]);
+    }
+  }
 }
