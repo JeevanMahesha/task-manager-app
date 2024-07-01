@@ -28,5 +28,6 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.DEPLOYMENT }}
-        publish_dir: dist/task-manager-app
+        folder: dist/task-manager-app/browser
+        branch: prod
         enable_jekyll: true
