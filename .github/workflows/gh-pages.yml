@@ -24,6 +24,9 @@ jobs:
       run: npm run build
 
     - name: Deploy 🚀
-      run: npx -p angular-cli-ghpages ng deploy --branch=prod --dir=dist/task-manager-app/browser
-      env:
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
         github_token: ${{ secrets.DEPLOYMENT }}
+        folder: dist/task-manager-app/browser
+        branch: prod
+        enable_jekyll: true
