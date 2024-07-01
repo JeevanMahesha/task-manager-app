@@ -3,7 +3,7 @@ name: Task Management Application GitHub Pages
 on:
   push:
     branches:
-    - main
+    - master
 
 jobs:
   deploy:
