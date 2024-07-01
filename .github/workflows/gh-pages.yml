@@ -27,6 +27,6 @@ jobs:
       if: success()
       uses: peaceiris/actions-gh-pages@v4
       with:
-        github_token: ${{ secrets.DEPLOYMENT }}
+        github_token: ${{ secrets.TASK_GH_SECRET }}
         publish_branch: prod
         enable_jekyll: true
