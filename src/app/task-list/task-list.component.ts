@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, DatePipe, NgClass, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,7 +19,6 @@ import { TaskService } from '../task.service';
   selector: 'app-task-list',
   standalone: true,
   imports: [
-    CommonModule,
     MatButtonModule,
     GetValuePipe,
     MatCardModule,
@@ -27,6 +26,10 @@ import { TaskService } from '../task.service';
     MatToolbarModule,
     MatButtonToggleModule,
     ReactiveFormsModule,
+    DatePipe,
+    NgClass,
+    AsyncPipe,
+    NgIf,
   ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss',
