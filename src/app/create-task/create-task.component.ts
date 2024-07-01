@@ -15,6 +15,8 @@ import { TaskService } from '../task.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { priorityLevels, taskStatus } from '../common.model';
+import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-create-task',
@@ -33,6 +35,7 @@ import { priorityLevels, taskStatus } from '../common.model';
 })
 export class CreateTaskComponent implements OnInit {
   readonly dialogRef = inject(MatDialogRef<CreateTaskComponent>);
+  readonly toastrService = inject(ToastrService);
   readonly matDialogData =
     inject<Record<'taskId', string | null>>(MAT_DIALOG_DATA);
   readonly taskService = inject(TaskService);
@@ -65,12 +68,22 @@ export class CreateTaskComponent implements OnInit {
     if (this.taskForm.invalid) {
       return;
     }
+    let taskCreationObservable$: Observable<string>;
     if (this.matDialogData.taskId) {
-      this.taskService.updateTask(this.taskForm.value);
+      taskCreationObservable$ = this.taskService.updateTask(
+        this.taskForm.value
+      );
     } else {
-      this.taskService.createNewTask(this.taskForm.value);
+      taskCreationObservable$ = this.taskService.createNewTask(
+        this.taskForm.value
+      );
     }
-    this.dialogRef.close();
+    taskCreationObservable$.subscribe({
+      next: (message) => {
+        this.toastrService.success(message), this.dialogRef.close();
+      },
+      error: this.toastrService.error.bind(this.toastrService),
+    });
   }
 
   onCancel() {

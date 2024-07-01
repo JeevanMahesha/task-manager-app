@@ -1,5 +1,13 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, filter, from, mergeMap } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  filter,
+  from,
+  mergeMap,
+  of,
+  throwError,
+} from 'rxjs';
 import { ITask } from './common.model';
 
 @Injectable()
@@ -33,21 +41,37 @@ export class TaskService {
       taskStatus: 'todo',
     },
   ]);
+  private insertionCount = 0;
 
-  createNewTask(task: Partial<ITask>): void {
-    const taskValue = this.tasksList$.getValue();
-    taskValue.push(task as ITask);
-    this.tasksList$.next(taskValue);
+  createNewTask(task: Partial<ITask>): Observable<string> {
+    try {
+      if (this.insertionCount > 0) {
+        this.insertionCount = 0;
+        throw new Error('Manually triggered error');
+      }
+      this.insertionCount++;
+      const taskValue = this.tasksList$.getValue();
+      taskValue.push(task as ITask);
+      this.tasksList$.next(taskValue);
+      return this.getReturnMessage('Task Created Successfully', 'Success');
+    } catch (error) {
+      return this.getReturnMessage('Task Creation Failed', 'Error');
+    }
   }
 
-  updateTask(task: Partial<ITask>): void {
-    const taskValue = this.tasksList$.getValue();
-    const taskIndex = taskValue.findIndex(
-      (eachTask) => eachTask.id === task.id
-    );
-    if (taskIndex > -1) {
-      taskValue[taskIndex] = task as ITask;
-      this.tasksList$.next([...taskValue]);
+  updateTask(task: Partial<ITask>): Observable<string> {
+    try {
+      const taskValue = this.tasksList$.getValue();
+      const taskIndex = taskValue.findIndex(
+        (eachTask) => eachTask.id === task.id
+      );
+      if (taskIndex > -1) {
+        taskValue[taskIndex] = task as ITask;
+        this.tasksList$.next([...taskValue]);
+      }
+      return this.getReturnMessage('Task Updated Successfully', 'Success');
+    } catch (error) {
+      return this.getReturnMessage('Task Update Failed', 'Error');
     }
   }
 
@@ -82,5 +106,14 @@ export class TaskService {
       taskValue[taskIndex].taskStatus = taskStatus;
       this.tasksList$.next([...taskValue]);
     }
+  }
+
+  private getReturnMessage(
+    messageValue: string,
+    status: 'Success' | 'Error'
+  ): Observable<string> {
+    return status === 'Success'
+      ? of(messageValue)
+      : throwError(() => new Error(messageValue));
   }
 }
