@@ -41,6 +41,7 @@ export class TaskService {
       taskStatus: 'todo',
     },
   ]);
+  // Force an error scenario by triggering the error manually
   private insertionCount = 0;
 
   /**

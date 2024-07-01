@@ -51,4 +51,10 @@ This is a Task Management Application that provides basic CRUD functionalities. 
    npm start
    ```
 
+2. **To Run Test**
+
+   ```bash
+   npm run test
+   ```
+
    This will start the application and you can access it in your web browser at `http://localhost:4200`.
