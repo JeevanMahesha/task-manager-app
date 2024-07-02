@@ -1,10 +1,8 @@
 name: Task Management Application GitHub Pages
-
 on:
   push:
     branches:
       - master
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -23,13 +21,21 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Delete existing files
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'github-actions@github.com'
+          git fetch origin gh-pages
+          git checkout gh-pages
+          git rm -rf .
+          git clean -fxd
+          git commit -m "Delete existing files" --allow-empty
+
       - name: Deploy to GitHub Pages
         if: success()
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.TASK_GH_SECRET }}
           publish_dir: ./dist/task-manager-app/browser
-          clean: true
-          enable_jekyll: true
-    permissions:
-      contents: write
+permissions:
+  contents: write
