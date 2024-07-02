@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "deployUrl": "https://jeevanmahesha.github.io/task-manager-app/",
             "outputPath": "dist/task-manager-app",
             "index": "src/index.html",
             "browser": "src/main.ts",
