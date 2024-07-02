@@ -19,7 +19,18 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build && ls -a
+        run: npm run build
+
+      - name: Cleanup gh-pages and Deploy
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'github-actions@github.com'
+          git fetch origin gh-pages
+          git checkout gh-pages
+          shopt -s extglob
+          rm -rf !("dist")
+          git add -A
+          git commit -m "Delete existing files except dist" --allow-empty
 
       - name: Deploy to GitHub Pages
         if: success()
