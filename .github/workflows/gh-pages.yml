@@ -15,21 +15,11 @@ jobs:
         with:
           node-version: "20.13.1"
 
-      - name: Delete existing files
-        run: |
-          git config --global user.name 'GitHub Actions'
-          git config --global user.email 'github-actions@github.com'
-          git fetch origin gh-pages
-          git checkout gh-pages
-          git rm -rf .
-          git clean -fxd
-          git commit -m "Delete existing files" --allow-empty
-
       - name: Install dependencies
         run: npm ci
 
       - name: Build
-        run: npm run build
+        run: npm run build && ls -a
 
       - name: Deploy to GitHub Pages
         if: success()
