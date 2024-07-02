@@ -10,8 +10,6 @@ This is a Task Management Application that provides basic CRUD functionalities. 
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
