@@ -1,4 +1,3 @@
-
 # Task Management Application
 
 This is a Task Management Application that provides basic CRUD functionalities. Users can create, edit, delete, and filter tasks based on their status and priority.
@@ -25,6 +24,8 @@ This is a Task Management Application that provides basic CRUD functionalities. 
 ## Prerequisites
 
 - **Node.js**: Ensure you have Node.js v20.X.X installed. You can download it from the [official Node.js website](https://nodejs.org/).
+
+- **NVM** if your using nvm this command `nvm use`
 
 ## Installation
 
