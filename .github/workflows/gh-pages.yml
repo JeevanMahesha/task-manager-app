@@ -15,12 +15,6 @@ jobs:
         with:
           node-version: "20.13.1"
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build
-
       - name: Delete existing files
         run: |
           git config --global user.name 'GitHub Actions'
@@ -30,6 +24,12 @@ jobs:
           git rm -rf .
           git clean -fxd
           git commit -m "Delete existing files" --allow-empty
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
 
       - name: Deploy to GitHub Pages
         if: success()
